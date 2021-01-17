@@ -21,7 +21,7 @@ var createTask = function(taskText, taskDate, taskList) {
 };
 
 var loadTasks = function() {
-  tasks.JSON.parse(localStorage.getItem("tasks"));
+  tasks = JSON.parse(localStorage.getItem("tasks"));
 
   // If nothing in localStorage, create a new object to track all task status arrays
   if (!tasks) {
@@ -126,7 +126,7 @@ $("#trash").droppable({
   drop: function(event, ui) {
     // Remove dragged elemot from the DOM
     ui.draggable.remove();
-    $(".bottom-trash").removeClass("bottome-trash-active");
+    $(".bottom-trash").removeClass("bottom-trash-active");
   },
   over: function(event, ui) {
     console.log(ui);
@@ -144,7 +144,7 @@ $("#modalDueDate").datepicker({
 });
 
 // Modal was triggered
-$("#tast-form-modal").on("show.bs.modal", function() {
+$("#task-form-modal").on("show.bs.modal", function() {
   // Clear values
   $("#modalTaskDescription, #modalDueDate").val("");
 });
@@ -156,7 +156,7 @@ $("#task-form-modal").on("shown.bs.modal", function() {
 });
 
 // Save button in modal was clicked
-$("#task-form-modal. btn-save").click(function() {
+$("#task-form-modal .btn-save").click(function() {
   // Get form values
   var taskText = $("#modalTaskDescription").val();
   var taskDate = $("#modalDueDate").val();
@@ -189,7 +189,7 @@ $(".list-group").on("click", "p", function() {
   $(this).replaceWith(textInput);
 
   // Auto focus new element
-  textInpud.trigger("focus");
+  textInput.trigger("focus");
 });
 
 // Editable field was un-focused
@@ -199,11 +199,11 @@ $(".list-group").on("blur", "textarea", function() {
 
   // Get status tupe and position in the list 
   var status = $(this)
-    .closes(".list-group")
+    .closest(".list-group")
     .attr("id")
     .replace("list-", "");
   var index = S(this)
-    .closes(".list-grou-item")
+    .closest(".list-group-item")
     .index();
 
     // Update task in array and resave to localstorage
